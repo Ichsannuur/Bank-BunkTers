@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+<decorators defaultdir="/decorator/">     
+	<excludes>         
+		<pattern>/assets/*</pattern>
+		<pattern>/jsp/notlogin/*</pattern>		
+	</excludes>
+
+	<decorator name="defaultTemplate" page="/decorator/template.jsp">         
+		<pattern>/jsp/main/*</pattern>
+	</decorator>
+	
+</decorators>

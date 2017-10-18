@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"/>
+	
+	<package name="notlogin" extends="hibernate-default">
+		<!-- Login -->
+		<action name="goLogin" class="com.bank.action.LoginAction">
+			<result name="IND" type="redirect">loginID</result>
+			<result name="EN" type="redirect">loginEN</result>
+     		<result name="success" type="redirect">goToDashboard</result>
+     		<result name="error">/jsp/notlogin/login.jsp</result>
+     	</action>
+     	<!-- /Login -->
+     	<!-- Logout -->
+     	<action name="logOut" class="com.bank.action.LogoutAction">
+			<result name="success">/jsp/notlogin/login.jsp</result>
+			<result name="error">/jsp/notlogin/login.jsp</result>
+		</action>
+		<!-- /Logout -->
+	</package>
+	
+	<package name="afterlogin" extends="hibernate-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.bank.interceptor.LoginInterceptor" />
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="loginInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="secureStack" ></default-interceptor-ref>
+		<global-results>
+			<result name="login" type="redirect">logOut</result>
+		</global-results>
+		
+		<!-- Menu Management -->
+		<action name="goToMenuManagement" class="com.bank.action.MenuManagementAction"
+			method="goToMenuManagement">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success">/jsp/main/menumanagement/menumanagement.jsp</result>
+		</action>
+		<action name="goToMenuManagementInput" class="com.bank.action.MenuManagementAction"
+			method="goToMenuManagementInput">
+			<result name="success">/jsp/main/menumanagement/menumanagement_input.jsp</result>
+		</action>
+		<action name="menu_management_delete" class="com.bank.action.MenuManagementAction"
+			method="menu_management_delete">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success" type="redirect">goToMenuManagement</result>
+		</action>
+		<action name="menu_management_edit" class="com.bank.action.MenuManagementAction"
+			method="menu_management_edit">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success">/jsp/main/menumanagement/menumanagement_update.jsp</result>
+		</action>
+		<action name="goToRoleManagement" class="com.bank.action.RoleManagementAction"
+			method="goToRoleManagement">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success">/jsp/main/menumanagement/rolemanagement.jsp</result>
+		</action>
+		<action name="goToRoleManagementInput" class="com.bank.action.RoleManagementAction"
+			method="goToRoleManagementInput">
+			<result name="success">/jsp/main/menumanagement/rolemanagement_input.jsp</result>
+		</action>
+		<action name="goToRoleMenuManagement" class="com.bank.action.RoleMenuManagementAction"
+			method="goToRoleMenuManagement">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success">/jsp/main/menumanagement/rolemenumanagement.jsp</result>
+		</action>
+		<action name="roleMenuSaveMenu" class="com.bank.action.RoleMenuManagementAction" 
+	          method="saveMenu">
+	          <interceptor-ref name="secureStack"/>
+	          <interceptor-ref name="basicStackHibernate"/>
+	          <result name="success" type="redirect">goToRoleMenuManagement</result>
+	          <result name="error">jsp/main/page_error.jsp</result>
+	    </action>
+	    <action name="roleMenuDeleteMenu" class="com.bank.action.RoleMenuManagementAction" 
+	          method="deleteMenu">
+	          <interceptor-ref name="secureStack"/>
+	          <interceptor-ref name="basicStackHibernate"/>
+	          <result name="success" type="redirect">goToRoleMenuManagement</result>
+	          <result name="error">jsp/main/page_error.jsp</result>
+	    </action>
+		<action name="rolemenu_clear" class="com.bank.action.RoleMenuManagementAction" 
+	          method="clear">
+	          <interceptor-ref name="secureStack"/>
+	          <interceptor-ref name="basicStackHibernate"/>
+	          <result name="success" type="redirect">goToRoleMenuManagement</result>
+	          <result name="error">jsp/main/page_error.jsp</result>
+	    </action>
+		<action name="roleMenuSelectRole" class="com.bank.action.RoleMenuManagementAction" 
+	          method="selectRole">
+	          <interceptor-ref name="secureStack"/>
+	          <interceptor-ref name="basicStackHibernate"/>
+	          <result name="success" type="redirect">goToRoleMenuManagement</result>
+	          <result name="error">jsp/main/page_error.jsp</result>
+	    </action>
+		<action name="saveRole" class="com.bank.action.RoleManagementAction"
+			method="saveRole">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success" type="redirect">goToRoleManagement</result>
+		</action>
+		<action name="role_management_delete" class="com.bank.action.RoleManagementAction"
+			method="role_management_delete">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success" type="redirect">goToRoleManagement</result>
+		</action>
+		<action name="role_management_edit" class="com.bank.action.RoleManagementAction"
+			method="role_management_edit">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success">/jsp/main/menumanagement/rolemanagement_update.jsp</result>
+		</action>
+		<action name="saveMenu" class="com.bank.action.MenuManagementAction"
+			method="saveMenu">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success" type="redirect">goToMenuManagement</result>
+		</action>
+		
+		<!-- /Menu Management -->
+		
+		<!-- Customer Registration -->
+		<action name="goToCustomerList" class="com.bank.action.CustomerRegistrationAction"
+			method="goToCustomerList">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success">/jsp/main/customerregistration/customerlist.jsp</result>
+		</action>
+		<action name="goToCustomerRegistration" class="com.bank.action.CustomerRegistrationAction"
+			method="goToCustomerRegistration">
+			<result name="success">/jsp/main/customerregistration/customerreg.jsp</result>
+		</action>
+		<action name="customerRegistration2" class="com.bank.action.CustomerRegistrationAction"
+			method="customerRegistrationCheck">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success">/jsp/main/customerregistration/customerreg2.jsp</result>
+			<result name="input">/jsp/main/customerregistration/customerreg.jsp</result>
+			<result name="error">/jsp/main/customerregistration/customerreg.jsp</result>
+		</action>
+		<action name="customerRegistrationSave" class="com.bank.action.CustomerRegistrationAction"
+			method="customerRegistrationSave">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success" type="redirect">goToCustomerList</result>
+			<result name="input">/jsp/main/customerregistration/customerreg.jsp</result>
+			<result name="error">/jsp/main/customerregistration/customerreg.jsp</result>
+		</action>
+		<action name="customerRegistrationDelete" class="com.bank.action.CustomerRegistrationAction"
+			method="customerRegistrationDelete">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success" type="redirect">goToCustomerList</result>
+			<result name="input">/jsp/main/customerregistration/customerlist.jsp</result>
+			<result name="error">/jsp/main/customerregistration/customerlist.jsp</result>
+		</action>
+		<action name="customerRegistrationEdit" class="com.bank.action.CustomerRegistrationAction"
+			method="customerRegistrationEdit">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="success">/jsp/main/customerregistration/customeredit.jsp</result>
+			<result name="input">/jsp/main/customerregistration/customerlist.jsp</result>
+			<result name="error">/jsp/main/customerregistration/customerlist.jsp</result>
+		</action>
+		<!-- /Customer Registration -->
+		
+		<!-- Show Image -->
+		<action name="showImage" class="com.bank.action.CustomerRegistrationAction">
+			<interceptor-ref name="secureStack"/>
+			<interceptor-ref name="basicStackHibernate"/>
+			<result name="input" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="success" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<!-- /Show Image -->
+		
+		<!-- MULTI LANGUAGE -->
+		<action name="setting" class="com.bank.action.BasicAction" >
+		      <result name="success">/jsp/main/setting.jsp</result>
+		</action>
+		<action name="setLanguagetoID" class="com.bank.action.MultiLanguageAction" 
+		      method="setLanguagetoID">
+		      <result name="success" type="redirect">setting</result>
+		</action>
+		<action name="setLanguagetoEN" class="com.bank.action.MultiLanguageAction" 
+		      method="setLanguagetoEN">
+		      <result name="success" type="redirect">setting</result>
+		</action>
+		<action name="loginID" class="com.bank.action.MultiLanguageAction" 
+		      method="setLanguagetoID">
+		      <result name="success" type="redirect">goToDashboard</result>
+		</action>
+		<action name="loginEN" class="com.bank.action.MultiLanguageAction" 
+		      method="setLanguagetoEN">
+		      <result name="success" type="redirect">goToDashboard</result>
+		</action>
+		<!-- /MULTI LANGUAGE -->
+      
+		<!-- Dashboard -->
+		<action name="goToDashboard" class="com.bank.action.DashboardAction" 
+		      method="goToDashboard">
+		      <result name="success">/jsp/main/dashboard.jsp</result>
+		      <result name="error">/jsp/main/page_error.jsp</result>
+		</action>
+		<!-- /Dashboard -->
+		
+		<!-- Transaction -->
+		<action name="goToTransaction_CashWithdrawal" class="com.bank.action.TransactionAction" 
+		      method="goToTransaction_CashWithdrawal">
+		      <result name="success">/jsp/main/transaction/cash_withdrawal.jsp</result>
+		      <result name="error">/jsp/main/page_error.jsp</result>
+		</action>
+		<action name="goToTransaction_CashDeposit" class="com.bank.action.TransactionAction" 
+		      method="goToTransaction_CashDeposit">
+		      <result name="success">jsp/main/transaction/cash_deposit.jsp</result>
+		      <result name="error">jsp/main/page_error.jsp</result>
+		</action>
+		<action name="goToTransaction_Overbooking" class="com.bank.action.TransactionAction" 
+		      method="goToTransaction_Overbooking">
+		      <result name="success">/jsp/main/transaction/overbooking.jsp</result>
+		      <result name="error">/jsp/main/page_error.jsp</result>
+		</action>
+		<action name="goToTransaction_DepositedClearing" class="com.bank.action.TransactionAction" 
+		      method="goToTransaction_DepositedClearing">
+		      <result name="success">/jsp/main/transaction/deposited_clearing.jsp</result>
+		      <result name="error">jsp/main/page_error.jsp</result>
+		</action>
+		<action name="goToTransaction_PullClearing" class="com.bank.action.TransactionAction" 
+		      method="goToTransaction_PullClearing">
+		      <result name="success">/jsp/main/transaction/pull_clearing.jsp</result>
+		      <result name="error">jsp/main/page_error.jsp</result>
+		</action>
+		<action name="goToTransaction_SKNCredit" class="com.bank.action.TransactionAction" 
+		      method="goToTransaction_SKNCredit">
+		      <result name="success">/jsp/main/transaction/credit_skn.jsp</result>
+		      <result name="error">jsp/main/page_error.jsp</result>
+		</action>
+		<action name="goToTransaction_RTGSOut" class="com.bank.action.TransactionAction" 
+		      method="goToTransaction_RTGSOut">
+		      <result name="success">/jsp/main/transaction/rtgs_out.jsp</result>
+		      <result name="error">jsp/main/page_error.jsp</result>
+		</action>
+		<action name="goToTransaction_OtherTransactions" class="com.bank.action.TransactionAction" 
+		      method="goToTransaction_OtherTransactions">
+		      <result name="success">/jsp/main/transaction/other_transactions.jsp</result>
+		      <result name="error">jsp/main/page_error.jsp</result>
+		</action>
+		<!-- /Transaction -->
+		
+		<!-- Operational Teller -->
+		<action name="goToCashTellerInquiry" class="com.bank.action.OperationalTellerAction" 
+		      method="goToCashTellerInquiry">
+		      <result name="success">/jsp/main/cash_teller_inquiry/cash_teller_inquiry.jsp</result>
+		      <result name="error">jsp/main/page_error.jsp</result>
+		</action>
+		<action name="goToCashTellerInquiry_Detail" class="com.bank.action.OperationalTellerAction" 
+		      method="goToCashTellerInquiry_Detail">
+		      <result name="success">jsp/main/cash_teller_inquiry/cash_teller_inquiry_detail.jsp</result>
+		      <result name="error">jsp/main/page_error.jsp</result>
+		</action>
+		<action name="goToCashTellerInquiry_Summary" class="com.bank.action.OperationalTellerAction" 
+		      method="goToCashTellerInquiry_Summary">
+		      <result name="success">jsp/main/cash_teller_inquiry/cash_teller_inquiry_summary.jsp</result>
+		      <result name="error">jsp/main/page_error.jsp</result>
+		</action>
+		<!-- /Operational Teller -->
+      
+	</package>
+</struts>

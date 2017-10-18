@@ -1,0 +1,183 @@
+/*	
+*	################################################################################
+*	
+*	My Custom Style for KINGADMIN
+*	---------------------------------------------------------------------
+*
+*	Version		1.0
+*	Author		PT. Multipolar Tbk
+*	
+*	Override theme style or create your new styles. Direct change to main.css
+*	is not recommended to avoid problems when theme updates arrived in the future
+*	
+*	################################################################################
+*/
+body{
+	background-color: white;
+	overflow:hidden;
+}
+.img{
+	-webkit-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+.img:hover{
+	box-shadow:0 0 10px gray;
+}
+.fixed-sidebar{
+	display:block;
+	position:absolute;
+	top:45px;
+	left:0;
+	background-color:#0070C0;
+	overflow-x:hidden;
+	overflow-y:auto;
+	box-sizing:border-box;
+	height:calc(100% - 85px);
+	padding-left:0;
+	padding-right:0;
+	margin-right:none;
+}
+.fixed-sidebar ul{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+.fixed-body{
+	display:block;
+	position:absolute;
+	box-sizing:border-box;
+	height:calc(100% - 85px);
+	right:-1px;
+	top:45px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+.content{
+	padding: 15px 30px;
+}
+.name{
+	width:100%;
+	display:block;
+	font-size:1.1em;
+	font-weight:bold;
+	line-height:25px;
+}
+.fixed-footer{
+	display:block;
+	width:100%;
+	position:fixed;
+	bottom:0;
+	z-index:10;
+}
+.form-control{
+	background-color: #ffffff;
+}
+.form-control:focus{
+	-webkit-box-shadow: inset 3px 3px 2px 0px #dddddd;
+	-moz-box-shadow: inset 3px 3px 2px 0px #dddddd;
+	box-shadow: inset 3px 3px 2px 0px #dddddd;
+}
+.btn:focus{
+	-webkit-box-shadow: inset 5px 3px 3px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: inset 5px 3px 3px 0px rgba(0,0,0,0.3);
+	box-shadow: inset 5px 3px 3px 0px rgba(0,0,0,0.3);
+}
+.take:focus{
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.top-bar, .footer{
+	background: #0080c0; /* For browsers that do not support gradients */
+}
+.page-auth .center-block{
+	background-color: white;
+	border: 2px solid #0080c0;
+	border-top: 40px solid #0080c0;
+}
+ul.main-menu > li a {
+	background-color: #ffffff;
+}
+.secondary-stat .data{
+	height:130px;
+}
+.secondary-stat .data .big-number{
+	font-size:250%;
+}
+.secondary-stat .data .col-right, .secondary-stat .data .col-left{
+	display:block;
+	float:left;
+	width:100%;
+}
+.secondary-stat .data .col-right > em{
+	font-size:110%;
+}
+.history .contextual-summary-info{
+	height:100px;
+	margin:10px;
+}
+.last-transaction > tr > td{
+	text-align:right;
+}
+.logo{
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight:bold;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.notif{
+	margin:20px;
+	padding:0 25px;
+}
+ul.main-menu>li.active>a{
+	background-color:#005490 !important;
+}
+ul.errorMessage,
+ul.actionMessage,
+ul.actionError{
+	margin:0;
+	padding:0;
+}
+ul.errorMessage>li,
+ul.actionMessage>li,
+ul.actionError>li{
+	list-style: none;
+	width:100%;
+	text-align:center;
+	font-weight:600;
+	line-height:40px;
+}
+.loginbtn{
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	color:#0070C0 !important;
+	font-weight:300 !important;
+	font-size:110% !important;
+	font-family:sans-serif;
+	line-height:25px !important;
+	width:25px;
+	height:25px;
+}
+.loginbtn:focus,
+.loginbtn:active,
+.loginbtn:hover{
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	color:#004271 !important;
+	box-shadow:none !important;
+}
+.user{
+	position:absolute;
+	top:35px !important;
+	margin:0 !important;
+	left:-195px !important;
+	width:250px !important;
+	padding:0 !important;
+	margin:0 !important;
+}
